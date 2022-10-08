@@ -1,0 +1,11 @@
+@import "_reset.scss";
+@import "_grid.scss";
+@import "_fonts.scss";
+
+body {
+  height: 100px;
+  width: 12px;
+  color-interpolation-filters: red;
+  background-color: #333333;
+  color: #333333;
+}
