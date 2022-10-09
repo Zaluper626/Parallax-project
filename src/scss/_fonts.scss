@@ -1,7 +1,15 @@
 @font-face {
-    font-family: 'Open Sans';
+    font-family: releway_f;
     font-style: normal;
-    font-weight: 300;
+    font-weight: 400;
     src: local(''),
-         url('../fonts/open-sans-v23-latin_cyrillic-300.woff2') format('woff2')
+         url('../fonts/raleway-regular.woff2') format('woff2')
+}
+
+@font-face {
+    font-family: releway_f;
+    font-style: normal;
+    font-weight: 900;
+    src: local(''),
+         url('../fonts/raleway-black.woff2') format('woff2')
 }

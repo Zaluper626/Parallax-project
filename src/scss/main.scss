@@ -1,11 +1,90 @@
+// @import "_grid.scss";
 @import "_reset.scss";
-@import "_grid.scss";
 @import "_fonts.scss";
 
-body {
-  height: 100px;
-  width: 12px;
-  color-interpolation-filters: red;
-  background-color: #333333;
-  color: #333333;
+/**/
+$index: calc(1vw + 1vh);
+
+/**/
+%container {
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0px 20px;
 }
+%ibg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+}
+%transformWillChange {
+    will-change: transform;
+}
+
+/**/
+.header-main {
+    position: relative;
+    @extend %container;
+
+    .layers {
+        min-height: 100vh;
+        padding: 0px 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        overflow: hidden
+    }
+
+    .layer {
+        @extend %ibg;
+        @extend %transformWillChange;
+        z-index: 2;
+    }
+
+    .layers__base {
+        transform: translate3d(0, calc(var(--scrollTop) / 1.6), 0);
+        z-index: 0;
+    }
+
+    .layers__middle {
+        transform: translate3d(0, calc(var(--scrollTop) / 2.5), 0);
+    }
+
+    .layers__front {
+        transform: translate3d(0, calc(var(--scrollTop) / 5.7), 0);
+    }
+
+    .layer__header {
+        font-weight: 900;
+        text-transform: uppercase;
+        color: #fdfbd9;
+        transform: translate3d(0, calc(var(--scrollTop) / 2), 0);
+        @extend %transformWillChange;
+        z-index: 1;
+
+        .layers__title {
+            font-size: calc($index * 2.5);
+            letter-spacing: calc($index / 2.5);
+        }
+
+        .layers__caption {
+            margin-top: calc($index * -1);
+            font-size: calc($index / 1.175);
+            letter-spacing: calc($index / 3.5)
+        }
+    }
+}
+
+.section-hero {
+    position: relative;
+    min-height: 100vh;
+    @extend %container;
+
+    >.section-hero__dungeon {
+        @extend %ibg;
+    }
+}
+
