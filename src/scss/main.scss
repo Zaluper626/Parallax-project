@@ -4,13 +4,11 @@
 
 /**/
 $index: calc(1vw + 1vh);
+$text-color: #fdfbd9;
+$section-hero-transform: translate3d(0, calc(var(--scrollTop) / -7.5), 0);
+$transition-transform: transform .75s cubic-bezier(.075, .5, 0, 1);
 
 /**/
-%container {
-    max-width: 1920px;
-    margin: 0 auto;
-    padding: 0px 20px;
-}
 %ibg {
     position: absolute;
     width: 100%;
@@ -22,46 +20,55 @@ $index: calc(1vw + 1vh);
 %transformWillChange {
     will-change: transform;
 }
+%flexЗositioning {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
 
 /**/
+.content {
+    @extend %transformWillChange;
+}
+
 .header-main {
     position: relative;
-    @extend %container;
-
-    .layers {
-        min-height: 100vh;
-        padding: 0px 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        overflow: hidden
-    }
 
     .layer {
         @extend %ibg;
         @extend %transformWillChange;
         z-index: 2;
     }
+    .layers {
+        height: 100vh;
+        @extend %flexЗositioning;
+        overflow: hidden
+    }
 
     .layers__base {
         transform: translate3d(0, calc(var(--scrollTop) / 1.6), 0);
+        transition: $transition-transform;
         z-index: 0;
     }
 
     .layers__middle {
         transform: translate3d(0, calc(var(--scrollTop) / 2.5), 0);
+        transition: $transition-transform;
     }
 
     .layers__front {
         transform: translate3d(0, calc(var(--scrollTop) / 5.7), 0);
+        transition: $transition-transform;
     }
 
     .layer__header {
         font-weight: 900;
         text-transform: uppercase;
-        color: #fdfbd9;
+        text-shadow: 0 0 15px #9e7d35;
+        color: $text-color;
         transform: translate3d(0, calc(var(--scrollTop) / 2), 0);
+        transition: $transition-transform;
         @extend %transformWillChange;
         z-index: 1;
 
@@ -78,13 +85,62 @@ $index: calc(1vw + 1vh);
     }
 }
 
+.header-main::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: calc($index * 10);
+    bottom: calc($index * -4.7);
+    background-image: url(../img/ground.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 30;
+}
+
 .section-hero {
     position: relative;
     min-height: 100vh;
-    @extend %container;
+    @extend %flexЗositioning;
+    z-index: 11;
 
-    >.section-hero__dungeon {
+    .section-hero__dungeon {
         @extend %ibg;
+    }
+
+    .section-hero__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: $text-color;
+        z-index: 12;
+
+        .section-hero__header {
+            font-weight: 900;
+            margin-bottom: calc($index / 1.25);
+            text-transform: uppercase;
+            font-size: calc($index * 1.8);
+            letter-spacing: calc($index / 7.5);
+            transform: $section-hero-transform;
+            transition: $transition-transform;
+            @extend %transformWillChange;
+        }
+
+        .section-hero__paragraph {
+            max-width: calc($index * 30);
+            font-size: calc($index * .9);
+            transform: $section-hero-transform;
+            transition: $transition-transform;
+            @extend %transformWillChange;
+        }
+
+        .section-hero__copy {
+            position: absolute;
+            bottom: calc($index * 2.5);
+            font-size: calc($index * .75);
+            letter-spacing: calc($index / 37.5);
+            opacity: .45;
+        }
     }
 }
 
